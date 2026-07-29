@@ -61,19 +61,19 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Previous",
+                    "name": "LeftShoulder",
                     "type": "Button",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Next",
+                    "name": "RightShoulder",
                     "type": "Button",
                     "id": "b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -85,6 +85,15 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Spellcast",
+                    "type": "Button",
+                    "id": "b7559f24-6ce6-4803-b0c4-bae0bdff32f1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 }
             ],
@@ -327,7 +336,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Next",
+                    "action": "RightShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -338,7 +347,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Next",
+                    "action": "RightShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -415,7 +424,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Previous",
+                    "action": "LeftShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -426,7 +435,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Previous",
+                    "action": "LeftShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -471,6 +480,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "816cb4ac-1606-47cd-9dfe-d247ee84e680",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Spellcast",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
