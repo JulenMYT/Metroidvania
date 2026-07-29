@@ -4,13 +4,23 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public PlayerState currentState;
+
+    public PlayerIdleState idleState;
+    public PlayerJumpState jumpState;
+    public PlayerMoveState moveState;
+    public PlayerCrouchState crouchState;
+    public PlayerSlideState slideState;
+
     [Header("Components")]
     public Rigidbody2D rb;
     public PlayerInput playerInput;
     public Animator anim;
+    public CapsuleCollider2D playerCollider;
 
     [Header("Movement Variables")]
-    public float speed;
+    public float walkSpeed;
+    public float runSpeed = 8;
     public float jumpForce;
     public float jumpCutMultiplier;
     public float normalGravity;
@@ -22,60 +32,98 @@ public class Player : MonoBehaviour
 
     //Inputs
     public Vector2 moveInput;
-    private bool jumpPressed;
-    private bool jumpReleased;
+    public bool runPressed;
+    public bool jumpPressed;
+    public bool jumpReleased;
 
 
-    [Header("GroundCheck")]
+    [Header("Ground Check")]
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
-    private bool isGrounded;
+    public bool isGrounded;
+
+    [Header("Crouch Check")]
+    public Transform headCheck;
+    public float headCheckRadius = 0.2f;
+
+    [Header("Slide Settings")]
+    public float slideDuration = 0.6f;
+    public float slideSpeed = 8;
+    public float slideStopDuration = 0.15f;
+
+    public float slideHeight;
+    public Vector2 slideOffset;
+    public float normalHeight;
+    public Vector2 normalOffset;
+
+    private bool isSliding;
+
+    private void Awake()
+    {
+        idleState = new PlayerIdleState(this);
+        jumpState = new PlayerJumpState(this);
+        moveState = new PlayerMoveState(this);
+        crouchState = new PlayerCrouchState(this);
+        slideState = new PlayerSlideState(this);
+    }
 
     private void Start()
     {
         rb.gravityScale = normalGravity;
+
+        ChangeState(idleState);
     }
 
     private void Update()
     {
-        Flip();
+        currentState.Update();
+
+        TryStandUp();
+
+        if (!isSliding)
+            Flip();
+
         HandleAnimations();
     }
 
     private void FixedUpdate()
     {
-        ApplyVariableGravity();
+        currentState.FixedUpdate();
+
         CheckGrounded();
-        HandleMovement();
-        HandleJump();
     }
 
-    private void HandleMovement()
+    public void ChangeState(PlayerState newState)
     {
-        float targetSpeed = moveInput.x * speed;
-        rb.linearVelocity = new Vector2(targetSpeed, rb.linearVelocity.y);
+        if (currentState != null)
+            currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 
-    private void HandleJump()
+    void TryStandUp()
     {
-        if (jumpPressed && isGrounded)
+        if (isSliding)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            jumpPressed = false;
-            jumpReleased = false;
-        }
-        if (jumpReleased)
-        {
-            if (rb.linearVelocity.y > 0) //if still going up
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
-            }
-            jumpReleased = false;
+            anim.SetBool("isCrouching", false);
+            return;
         }
     }
 
-    void ApplyVariableGravity()
+    public void SetColliderNormal()
+    {
+        playerCollider.size = new Vector2(playerCollider.size.x, normalHeight);
+        playerCollider.offset = normalOffset;
+    }
+
+    public void SetColliderSlide()
+    {
+        playerCollider.size = new Vector2(playerCollider.size.x, slideHeight);
+        playerCollider.offset = slideOffset;
+    }
+
+    public void ApplyVariableGravity()
     {
         if (rb.linearVelocity.y < -0.1f)
         {
@@ -96,15 +144,15 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
+    public bool CheckForCeiling()
+    {
+        return Physics2D.OverlapCircle(headCheck.position, headCheckRadius, groundLayer);
+    }
+
     void HandleAnimations()
     {
-        anim.SetBool("isJumping", rb.linearVelocity.y > 0.1f);
         anim.SetBool("isGrounded", isGrounded);
-
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
-
-        anim.SetBool("isIdle", Mathf.Abs(moveInput.x) < 0.1f && isGrounded);
-        anim.SetBool("isWalking", Mathf.Abs(moveInput.x) > 0.1f && isGrounded);
     }
 
     void Flip()
@@ -126,6 +174,11 @@ public class Player : MonoBehaviour
         moveInput = value.Get<Vector2>();
     }
 
+    public void OnRun(InputValue value)
+    {
+        runPressed = value.isPressed;
+    }
+
     public void OnJump(InputValue value)
     {
         if (value.isPressed)
@@ -143,5 +196,8 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(headCheck.position, headCheckRadius);
     }
 }
