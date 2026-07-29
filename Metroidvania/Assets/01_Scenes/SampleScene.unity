@@ -6238,7 +6238,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c14e60cd221c7c448d5e0463e674647, type: 2}
   - {fileID: 11400000, guid: 4df4281be541e1440a6f1c2abddf86f5, type: 2}
   - {fileID: 11400000, guid: e3a90582f22c3bd42bce5734ae623be8, type: 2}
-  currentSpell: {fileID: 11400000, guid: e3a90582f22c3bd42bce5734ae623be8, type: 2}
+  currentIndex: 0
 --- !u!114 &482966169
 MonoBehaviour:
   m_ObjectHideFlags: 0
