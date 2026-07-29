@@ -46,7 +46,5 @@ public class PlayerJumpState : PlayerState
     { 
         base.Exit();
         anim.SetBool("isJumping", false);
-        JumpPressed = false;
-        JumpReleased = false;
     }
 }
