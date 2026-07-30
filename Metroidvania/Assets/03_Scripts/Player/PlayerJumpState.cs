@@ -18,7 +18,15 @@ public class PlayerJumpState : PlayerState
     {
         base.Update();
 
-        if (player.isGrounded && rb.linearVelocity.y <= 0.1f)
+        if (!player.isGrounded && player.isTouchingWall && MoveInput.x == player.facingDirection)
+        {
+            player.ChangeState(player.wallSlideState);
+        }
+        //else if (JumpPressed && player.isTouchingWall)
+        //{
+        //    player.ChangeState(player.wallJumpState);
+        //}
+        else if (player.isGrounded && rb.linearVelocity.y <= 0.1f)
         {
             player.ChangeState(player.idleState);
         }
@@ -46,5 +54,8 @@ public class PlayerJumpState : PlayerState
     { 
         base.Exit();
         anim.SetBool("isJumping", false);
+
+        JumpPressed = false;
+        JumpReleased = false;
     }
 }

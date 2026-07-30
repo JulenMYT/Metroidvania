@@ -22,7 +22,7 @@ public class PlayerIdleState : PlayerState
         {
             player.ChangeState(player.attackState);
         }
-        else if (JumpPressed)
+        else if (JumpPressed && player.isGrounded)
         {
             JumpPressed = false;
             player.ChangeState(player.jumpState);
