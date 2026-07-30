@@ -19,7 +19,7 @@ public class SparkSpellSO : SpellSO
 
             if (health != null)
             {
-                health.ChangeHealth(-damage);
+                health.ChangeHealth(-damage, player.transform.position);
             }
 
             if (sparkFXPrefab != null)
