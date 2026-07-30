@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UILayer
+    uniqueID: 1484897261
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []

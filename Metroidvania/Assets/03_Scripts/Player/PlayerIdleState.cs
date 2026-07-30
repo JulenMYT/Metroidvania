@@ -7,7 +7,6 @@ public class PlayerIdleState : PlayerState
     public override void Enter()
     {
         anim.SetBool("isIdle", true);
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
 
     public override void Update()
@@ -15,7 +14,7 @@ public class PlayerIdleState : PlayerState
         base.Update();
 
 
-        if (SpellcastPressed && magic.CanCast)
+        if (SpellcastPressed && magic.CanCast(magic.CurrentSpell))
         {
             player.ChangeState(player.spellcastState);
         }
@@ -36,6 +35,8 @@ public class PlayerIdleState : PlayerState
         {
             player.ChangeState(player.crouchState);
         }
+
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
 
     public override void Exit()

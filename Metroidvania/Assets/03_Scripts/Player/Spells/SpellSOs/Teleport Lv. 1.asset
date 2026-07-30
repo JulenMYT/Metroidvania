@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e77f2628b31774ca855be24f528295, type: 3}
   m_Name: Teleport Lv. 1
   m_EditorClassIdentifier: Assembly-CSharp::TeleportSpellSO
-  spellName: Teleport Lv. 1
-  cooldown: 1
+  itemName: Teleport Lv. 1
   icon: {fileID: -1695605910, guid: 056d61f8ace56c2469a0a79f45427cbb, type: 3}
+  itemSprite: {fileID: -5164599079202685034, guid: 6e6bbd0d7f8cbef418e56e8a1765fb85, type: 3}
+  cooldown: 1
   range: 5
   playerRadius: 1.5
   obstacleLayer:

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4218f9021ee2dd149831c38f4a4cc63f, type: 3}
   m_Name: Spark Lv. 2
   m_EditorClassIdentifier: Assembly-CSharp::SparkSpellSO
-  spellName: Spark Lv. 2
-  cooldown: 1
+  itemName: Spark Lv. 2
   icon: {fileID: -1072823063, guid: 056d61f8ace56c2469a0a79f45427cbb, type: 3}
+  itemSprite: {fileID: -8040672147021824394, guid: c231cda3fb34cfe42aaf5c950c078678, type: 3}
+  cooldown: 1
   damage: 5
   radius: 10
   sparkFXPrefab: {fileID: 3199637333819856996, guid: 5ae5eabfadf76b5408970eadda1e1b5a, type: 3}

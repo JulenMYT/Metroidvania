@@ -224,7 +224,8 @@ public class Player : MonoBehaviour
     {
         if (value.isPressed)
         {
-            jumpPressed = true;
+            if (isGrounded && !CheckForCeiling())
+                jumpPressed = true;
             jumpReleased = false;
         }
         else //buton is released

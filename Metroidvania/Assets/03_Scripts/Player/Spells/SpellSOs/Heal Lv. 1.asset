@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b2e0b50c85b134cba6cbba564b16e7, type: 3}
   m_Name: Heal Lv. 1
   m_EditorClassIdentifier: Assembly-CSharp::HealSpellSO
-  spellName: Heal Lv. 1
-  cooldown: 5
+  itemName: Heal Lv. 1
   icon: {fileID: 18345544, guid: 056d61f8ace56c2469a0a79f45427cbb, type: 3}
+  itemSprite: {fileID: -5164599079202685034, guid: 6e6bbd0d7f8cbef418e56e8a1765fb85, type: 3}
+  cooldown: 5
   healAmount: 10
   healFXPrefab: {fileID: 508925859698885655, guid: 1696f3e34345e0443916a7baa5ed3e93, type: 3}
