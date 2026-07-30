@@ -188,6 +188,6 @@ MonoBehaviour:
   - {fileID: 5925505854940602976, guid: 8a36e906a5cf31947a67bfddf4442429, type: 3}
   - {fileID: 2914546941564527173, guid: fa9dfd67a092d7c4d8509db6d2c70581, type: 3}
   - {fileID: 865457363660373275, guid: 21b1e6119f4f1774daf62695677857a1, type: 3}
-  spawnForce: 5
+  spawnForce: 8
   torque: 5
-  lifetime: 2
+  lifetime: 5

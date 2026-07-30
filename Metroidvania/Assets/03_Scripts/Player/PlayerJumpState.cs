@@ -22,13 +22,13 @@ public class PlayerJumpState : PlayerState
         {
             player.ChangeState(player.wallSlideState);
         }
-        //else if (JumpPressed && player.isTouchingWall)
-        //{
-        //    player.ChangeState(player.wallJumpState);
-        //}
         else if (player.isGrounded && rb.linearVelocity.y <= 0.1f)
         {
             player.ChangeState(player.idleState);
+        }
+        else if (rb.linearVelocity.y < 0.1f)
+        {
+            player.ChangeState(player.fallState);
         }
     }
 

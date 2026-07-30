@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public PlayerSpellcastState spellcastState;
     public PlayerWallJumpState wallJumpState;
     public PlayerWallSlideState wallSlideState;
+    public PlayerFallState fallState;
 
     [Header("Core Components")]
     public Combat combat;
@@ -86,6 +87,7 @@ public class Player : MonoBehaviour
         spellcastState = new PlayerSpellcastState(this);
         wallJumpState = new PlayerWallJumpState(this);
         wallSlideState = new PlayerWallSlideState(this);
+        fallState = new PlayerFallState(this);
     }
 
     private void Start()
@@ -178,7 +180,6 @@ public class Player : MonoBehaviour
     void HandleAnimations()
     {
         anim.SetBool("isGrounded", isGrounded);
-        anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
     void Flip()

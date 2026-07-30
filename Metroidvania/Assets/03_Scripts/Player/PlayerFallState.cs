@@ -1,16 +1,49 @@
 using UnityEngine;
 
-public class PlayerFallState : MonoBehaviour
+public class PlayerFallState : PlayerState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public PlayerFallState(Player player) : base(player) { }
+
+    public override void Enter()
     {
-        
+        base.Enter();
+
+        anim.SetBool("isFalling", true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        
+        base.Update();
+
+        if (!player.isGrounded && player.isTouchingWall && MoveInput.x == player.facingDirection)
+        {
+            player.ChangeState(player.wallSlideState);
+        }
+        else if (player.isGrounded && rb.linearVelocity.y < 0.1f)
+        {
+            player.ChangeState(player.idleState);
+        }
+    }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        player.ApplyVariableGravity();
+
+        float speed = RunPressed ? player.runSpeed : player.walkSpeed;
+        float targetSpeed = speed * MoveInput.x;
+
+        rb.linearVelocity = new Vector2(targetSpeed, rb.linearVelocity.y);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        anim.SetBool("isFalling", false);
+
+        JumpPressed = false;
+        JumpReleased = false;
     }
 }

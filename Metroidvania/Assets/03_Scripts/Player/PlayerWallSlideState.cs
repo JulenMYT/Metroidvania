@@ -24,6 +24,10 @@ public class PlayerWallSlideState : PlayerState
         }
         else if (!player.isTouchingWall || Mathf.Abs(MoveInput.x) < 0.1f)
         {
+            player.ChangeState(player.fallState);
+        }
+        else if (player.isGrounded)
+        {
             player.ChangeState(player.idleState);
         }
     }

@@ -4,6 +4,7 @@ public class PlayerSlideState : PlayerState
 {
     private float slideTimer;
     private float slideStopTimer;
+    private int facingDirection;
 
     public PlayerSlideState(Player player) : base(player) { }
 
@@ -13,6 +14,7 @@ public class PlayerSlideState : PlayerState
 
         slideTimer = player.slideDuration;
         slideStopTimer = 0;
+        facingDirection = player.facingDirection;
 
         player.SetColliderSlide();
         anim.SetBool("isSliding", true);
@@ -58,7 +60,8 @@ public class PlayerSlideState : PlayerState
 
         if (slideTimer > 0)
         {
-            rb.linearVelocity = new Vector2(player.slideSpeed * player.facingDirection, rb.linearVelocity.y);
+            player.facingDirection = facingDirection;
+            rb.linearVelocity = new Vector2(player.slideSpeed * facingDirection, rb.linearVelocity.y);
         }
         else
         {

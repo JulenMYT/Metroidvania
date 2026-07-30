@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerWallJumpState : PlayerState
 {
-    private float horizontalJumpPercent = 0.5f;
+    private float horizontalJumpPercent = 0.4f;
+    private float wallJumpDelay = 0.2f;
+    private float changeStateTime;
 
     public PlayerWallJumpState(Player player) : base(player) { }
 
@@ -10,25 +13,23 @@ public class PlayerWallJumpState : PlayerState
     {
         base.Enter();
 
-        anim.SetBool("isWallJumping", true);
+        anim.SetBool("isJumping", true);
         rb.linearVelocity = Vector2.zero;
         rb.linearVelocity = new Vector2(-player.facingDirection * horizontalJumpPercent, 1f) * player.jumpForce;
 
         JumpPressed = false;
         JumpReleased = false;
+
+        changeStateTime = Time.time + wallJumpDelay;
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (!player.isGrounded && player.isTouchingWall && MoveInput.x == player.facingDirection && rb.linearVelocity.y < 0)
+        if (Time.time > changeStateTime)
         {
-            player.ChangeState(player.wallSlideState);
-        }
-        else if (JumpPressed && player.isTouchingWall)
-        {
-            player.ChangeState(player.wallJumpState);
+            player.ChangeState(player.fallState);
         }
         else if (player.isGrounded && rb.linearVelocity.y < 0.1f)
         {
@@ -53,7 +54,6 @@ public class PlayerWallJumpState : PlayerState
     {
         base.Exit();
 
-        anim.SetBool("isWallJumping", false);
+        anim.SetBool("isJumping", false);
     }
-   
 }

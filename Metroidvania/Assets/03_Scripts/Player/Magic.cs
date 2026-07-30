@@ -11,6 +11,7 @@ public class Magic : MonoBehaviour
     [SerializeField] private List<SpellSO> availableSpells = new List<SpellSO>();
     [SerializeField] private int currentIndex = 0;
     public SpellSO CurrentSpell => availableSpells.Count > 0? availableSpells[currentIndex] : null;
+    private SpellSO lockedSpell;
 
     private Dictionary<SpellSO, float> spellCooldowns = new Dictionary<SpellSO, float>();
 
@@ -64,6 +65,11 @@ public class Magic : MonoBehaviour
         HighlightCurrentSpell();
     }
 
+    public void LockSpell()
+    {
+        lockedSpell = CurrentSpell;
+    }
+
     private void HighlightCurrentSpell()
     {
         if (CurrentSpell != null)
@@ -80,17 +86,19 @@ public class Magic : MonoBehaviour
 
     public bool CanCast(SpellSO spellSO)
     {
+        if (spellSO == null)
+            return false;
         return Time.time >= spellCooldowns[spellSO];
     }
 
     private void CastSpell()
     {
-        if (!CanCast(CurrentSpell) || CurrentSpell == null)
+        if (!CanCast(lockedSpell) || lockedSpell == null)
             return;
 
-        CurrentSpell.Cast(player);
+        lockedSpell.Cast(player);
 
-        spellCooldowns[CurrentSpell] = Time.time + CurrentSpell.cooldown;
-        spellUIManager.TriggerCooldown(CurrentSpell, CurrentSpell.cooldown);
+        spellCooldowns[lockedSpell] = Time.time + lockedSpell.cooldown;
+        spellUIManager.TriggerCooldown(lockedSpell, lockedSpell.cooldown);
     }
 }

@@ -24,7 +24,7 @@ public class SparkSpellSO : SpellSO
 
             if (sparkFXPrefab != null)
             {
-                GameObject newFX = Instantiate(sparkFXPrefab, enemy.transform.position, Quaternion.identity);
+                GameObject newFX = Instantiate(sparkFXPrefab, enemy.transform.position, Quaternion.identity, enemy.transform);
                 Destroy(newFX, 2);
             }
         }

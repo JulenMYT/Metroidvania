@@ -69,7 +69,7 @@ public class Chest : MonoBehaviour
 
             Rigidbody2D rb = newLoot.GetComponent<Rigidbody2D>();
 
-            Vector2 direction = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(0.5f, 1)).normalized;
+            Vector2 direction = new Vector2(Random.Range(-0.05f, 0.05f), Random.Range(0.5f, 1)).normalized;
             rb.AddForce(direction * launchForce, ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(spawnDelay);

@@ -9,7 +9,7 @@ public class HealSpellSO : SpellSO
 
     public override void Cast(Player player)
     {
-        GameObject newHealFX = Instantiate(healFXPrefab, player.transform.position + Vector3.down * 0.5f, Quaternion.identity);
+        GameObject newHealFX = Instantiate(healFXPrefab, player.transform.position + Vector3.down * 0.5f, Quaternion.identity, player.transform);
         Destroy(newHealFX, 2);
         player.health.ChangeHealth(healAmount);
     }

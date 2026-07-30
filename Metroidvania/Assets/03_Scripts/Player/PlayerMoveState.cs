@@ -33,6 +33,10 @@ public class PlayerMoveState : PlayerState
         {
             player.ChangeState(player.slideState);
         }
+        else if (rb.linearVelocity.y < -0.1f)
+        {
+            player.ChangeState(player.fallState);
+        }
         else
         {
             anim.SetBool("isWalking", !RunPressed);

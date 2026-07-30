@@ -35,6 +35,10 @@ public class PlayerIdleState : PlayerState
         {
             player.ChangeState(player.crouchState);
         }
+        else if (rb.linearVelocity.y < -0.1f)
+        {
+            player.ChangeState(player.fallState);
+        }
 
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }

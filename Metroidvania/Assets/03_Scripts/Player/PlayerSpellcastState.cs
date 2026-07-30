@@ -8,6 +8,7 @@ public class PlayerSpellcastState : PlayerState
     {
         base.Enter();
 
+        player.magic.LockSpell();
         anim.SetBool("isCasting", true);
     }
 
