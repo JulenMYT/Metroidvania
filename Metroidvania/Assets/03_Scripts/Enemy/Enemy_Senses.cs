@@ -14,10 +14,18 @@ public class Enemy_Senses : MonoBehaviour
     public bool IsHittingWall() => Physics2D.Raycast(wallCheck.position, Vector2.right, config.wallCheckDistance, config.wallLayer);
     public Transform GetChaseTarget()
     {
+        if (config.chaseRange == 0)
+            return null;
+
         Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, config.chaseRange, config.targetLayer);
 
         if (hit == null) 
             return null;
+
+        Player player = hit.GetComponent<Player>();
+        if (player.currentState == player.deathState)
+            return null;
+
         return hit.transform;
     }
 

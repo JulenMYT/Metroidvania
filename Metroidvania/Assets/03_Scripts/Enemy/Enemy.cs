@@ -51,5 +51,4 @@ public class Enemy : MonoBehaviour
         scale.x = FacingDirection;
         transform.localScale = scale;
     }
-
 }

@@ -30,8 +30,12 @@ public class Damage : MonoBehaviour
         player.ChangeState(player.damagedState);
     }
 
-    void HandleDeath()
+    void HandleDeath(Vector2 sourcePosition)
     {
+        int knockbackDir = 0;
+        knockbackDir = transform.position.x > sourcePosition.x ? 1 : -1;
 
+        player.deathState.SetParameters(knockbackDir);
+        player.ChangeState(player.deathState);
     }
 }

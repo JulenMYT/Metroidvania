@@ -245,6 +245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Training Dummy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2027244895243538231, guid: 66c4f95a07f209844a21dfb8b56dba55, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 349120402}
     - target: {fileID: 8168970873331805786, guid: 66c4f95a07f209844a21dfb8b56dba55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.412685
@@ -12016,6 +12020,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7797a210022e3d4f9bd8654411a7911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellSlot
+--- !u!114 &349120402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2297835478287496877, guid: 66c4f95a07f209844a21dfb8b56dba55, type: 3}
+  m_PrefabInstance: {fileID: 123951132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5250e444c84eacf498846688f8dc9655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
 --- !u!1001 &426904656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12242,7 +12257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 0
-  maxHealth: 100
+  maxHealth: 1000
 --- !u!114 &482966170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18564,10 +18579,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Damage
   enemy: {fileID: 692021356}
   health: {fileID: 692021362}
-  deathParts: []
-  spawnForce: 5
-  torque: 5
-  lifetime: 0
+  deathParts:
+  - {fileID: 141866750138646016, guid: 885344f8a4db074478dfe0b2736559af, type: 3}
+  - {fileID: 8814361557879159477, guid: 1a53cc26c7d3df84695ec3b76602fb8b, type: 3}
+  - {fileID: 5136791377644173241, guid: 793e3aec2257c0e419d0f648f60efa4f, type: 3}
+  - {fileID: 7557199732908403568, guid: a95eaad989c5745479c2cafdd76ab88a, type: 3}
+  - {fileID: 1937616748954790637, guid: 4780e25d67c481f42bc2338cb0dd0be1, type: 3}
+  - {fileID: 6890114811456573890, guid: 0756e8f3c82bcac48b54cc3f1c256006, type: 3}
+  spawnForce: 15
+  torque: 15
+  lifetime: 5
 --- !u!1 &845980569
 GameObject:
   m_ObjectHideFlags: 0

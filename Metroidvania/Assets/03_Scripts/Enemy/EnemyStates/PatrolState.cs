@@ -18,6 +18,6 @@ public class PatrolState : State
             enemy.Flip();
             return;
         }
-        rb.linearVelocity = new Vector2(config.patrolSpeed * enemy.FacingDirection  , rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(config.patrolSpeed * enemy.FacingDirection, rb.linearVelocity.y);
     }
 }

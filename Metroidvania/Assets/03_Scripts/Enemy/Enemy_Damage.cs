@@ -28,10 +28,10 @@ public class Enemy_Damage : MonoBehaviour
         int knockbackDir = 0;
         knockbackDir = transform.position.x > sourcePosition.x ? 1 : -1;
 
-        enemy.StateMachine.ChangeState(new DamagedState(enemy, knockbackDir));
+        enemy?.StateMachine.ChangeState(new DamagedState(enemy, knockbackDir));
     }
 
-    void HandleDeath()
+    void HandleDeath(Vector2 sourcePosition)
     {
         foreach (GameObject prefab in deathParts)
         {
