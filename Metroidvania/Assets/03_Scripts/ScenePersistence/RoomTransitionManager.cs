@@ -9,6 +9,7 @@ public class RoomTransitionManager : MonoBehaviour
     [SerializeField] private CameraManager camManager;
 
     private string currentRoom = "";
+    private bool isTransitioning;
 
     void Start()
     {
@@ -17,12 +18,24 @@ public class RoomTransitionManager : MonoBehaviour
 
     public void EnterRoom(string sceneName, string spawnID)
     {
+        if (isTransitioning)
+            return;
+
         StartCoroutine(Transition(sceneName, spawnID));
     }
 
     private IEnumerator Transition(string sceneName, string spawnID)
     {   
-        yield return screenFader.Fade(0f, 1f, 0.5f);
+        isTransitioning = true;    //Lock
+
+        Player player = ServiceLocator.Get<Player>();
+        player.isControlLocked = true;
+
+        if (!string.IsNullOrEmpty(spawnID))
+        {
+            yield return screenFader.Fade(0f, 1f, 0.5f);
+        }
+
         if (!string.IsNullOrEmpty(currentRoom))
         {
             yield return SceneManager.UnloadSceneAsync(currentRoom);
@@ -37,43 +50,46 @@ public class RoomTransitionManager : MonoBehaviour
         }
 
         currentRoom = SceneManager.GetActiveScene().name;
-        SetupRoom(spawnID);
-        SetupCameraConfiner();
-        ResetParallax();
+
+        yield return null;
+        RoomService service = ServiceLocator.Get<RoomService>();
+
+        SetupRoom(service, spawnID);
+        SetupCameraConfiner(service);
+        ResetParallax(service);
+
+        isTransitioning = false;
+        player.isControlLocked = false;
 
         yield return new WaitForSeconds(0.5f);
-        yield return screenFader.Fade(1f, 0f, 1f);
-    }
-
-    private void SetupRoom(string spawnID)
-    {
-        SpawnPoint[] spawns = FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
-        SpawnPoint spawnToUse = spawns[0];
-
         if (!string.IsNullOrEmpty(spawnID))
         {
-            foreach (SpawnPoint spawn in spawns)
-            {
-                if (spawn.SpawnID == spawnID)
-                {
-                    spawnToUse = spawn;
-                    transform.position = spawn.transform.position;
-                    break;
-                }
-            }
+            yield return screenFader.Fade(0f, 1f, 0.5f);
         }
     }
 
-    private void SetupCameraConfiner()
+    private void SetupRoom(RoomService service, string spawnID)
     {
-        CameraConfinerProvider provider = FindFirstObjectByType<CameraConfinerProvider>();
-        camManager.SetConfiner(provider.confiner);
+        if (string.IsNullOrEmpty(spawnID))
+            return;
+
+        SpawnPoint spawnToUse = service.GetSpawn(spawnID);
+
+        if (spawnToUse != null)
+        {
+            transform.position = spawnToUse.transform.position;
+        }
     }
 
-    private void ResetParallax()
+    private void SetupCameraConfiner(RoomService service)
     {
-        ParallaxManager parallax = FindFirstObjectByType<ParallaxManager>();
-        if (parallax != null)
-            parallax.Initialize(camManager.camTransform);
+        if (service.provider != null)
+            camManager.SetConfiner(service.provider.confiner);
+    }
+
+    private void ResetParallax(RoomService service)
+    {
+        if (service.parallax != null)
+            service.parallax.Initialize(camManager.camTransform);
     }
 }
