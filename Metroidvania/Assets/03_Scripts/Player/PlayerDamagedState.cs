@@ -28,7 +28,7 @@ public class PlayerDamagedState : PlayerState
         base.FixedUpdate();
 
         knockbackDuration -= Time.fixedDeltaTime;
-        if (knockbackDuration < 0)
+        if (knockbackDuration <= 0)
         {
             rb.linearVelocity = Vector2.zero;
             player.ChangeState(player.idleState);

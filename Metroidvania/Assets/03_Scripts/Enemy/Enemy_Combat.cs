@@ -15,6 +15,7 @@ public class Enemy_Combat : MonoBehaviour
     }
 
     public bool CanMeleeAttack() => Time.time > lastAttackTime + config.meleeCooldown;
+    public bool CanRangedAttack() => Time.time > lastAttackTime + config.rangedCooldown;
 
     public void PerformMeleeAttack()
     {
@@ -29,5 +30,22 @@ public class Enemy_Combat : MonoBehaviour
         {
             health.ChangeHealth(-config.meleeDamage, transform.position);
         }
+    }
+
+    public void PerformRangedAttack()
+    {
+        lastAttackTime = Time.time;
+
+        Vector2 fireDirection = (enemy.CurrentTarget.position - attackPoint.position).normalized;
+        float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        GameObject newProjectile = Instantiate(config.projectilePrefab, attackPoint.position, rotation);
+        Projectile projectile  = newProjectile.GetComponent<Projectile>();
+        projectile.Damage = config.rangedDamage;
+        projectile.LifeTime = config.projectileLifetime;
+
+        Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = fireDirection * config.projectileSpeed;
     }
 }

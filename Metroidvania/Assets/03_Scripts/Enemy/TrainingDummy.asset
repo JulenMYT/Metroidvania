@@ -30,5 +30,11 @@ MonoBehaviour:
   meleeRange: 0
   meleeDamage: 0
   meleeCooldown: 0
+  rangedRange: 0
+  rangedDamage: 0
+  rangedCooldown: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0
   knockbackDuration: 1
   knockbackForce: 0

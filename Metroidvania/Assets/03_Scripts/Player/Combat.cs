@@ -35,4 +35,10 @@ public class Combat : MonoBehaviour
             enemy.gameObject.GetComponent<Health>().ChangeHealth(-damage, transform.position);
         }
     }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+    }
 }

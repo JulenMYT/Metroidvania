@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
     //Variables
     public int FacingDirection { get; private set; } = 1;
 
+    public Transform CurrentTarget { get; set; }
+
     //Components
     public Rigidbody2D RB { get; private set; }
     public Animator Anim { get; private set; }
