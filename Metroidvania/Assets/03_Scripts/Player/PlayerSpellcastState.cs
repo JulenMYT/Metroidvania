@@ -15,6 +15,8 @@ public class PlayerSpellcastState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
 
     public override void AnimationFinished()
