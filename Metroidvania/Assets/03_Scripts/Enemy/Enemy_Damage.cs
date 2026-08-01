@@ -33,6 +33,7 @@ public class Enemy_Damage : MonoBehaviour
 
     void HandleDeath(Vector2 sourcePosition)
     {
+        enemy.Die();
         if (deathParts.Length == 0)
         {
             enemy.Anim.Play("Death");

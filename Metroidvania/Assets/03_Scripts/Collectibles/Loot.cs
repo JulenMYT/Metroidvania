@@ -14,6 +14,22 @@ public class Loot : MonoBehaviour
     [SerializeField] private bool canBeCollected = false;
     [SerializeField] private float collectDelay;
 
+    private PersistentGuid guid;
+    private WorldState worldState;
+    private bool isCollected = false;
+
+    private void Awake() => guid = GetComponent<PersistentGuid>();
+
+    private void Start()
+    {
+        //Persistent Data
+        worldState = ServiceLocator.Get<WorldState>();
+        if (worldState.collectedLoot.Contains(guid.Guid))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void Initialize(CollectibleSO collectibleSO)
     {
         this.collectibleSO = collectibleSO;
@@ -49,6 +65,11 @@ public class Loot : MonoBehaviour
 
     private void CollectItem()
     {
+        if (isCollected)
+            return;
+
+        isCollected = true;
+        worldState.collectedLoot.Add(guid.Guid);
         itemMessage.text = "Found " + collectibleSO.itemName;
         anim.Play("CollectLoot");
         collectibleSO.Collect(player);

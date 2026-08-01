@@ -56,15 +56,16 @@ public class RoomTransitionManager : MonoBehaviour
 
         SetupRoom(service, spawnID);
         SetupCameraConfiner(service);
-        ResetParallax(service);
 
         isTransitioning = false;
         player.isControlLocked = false;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
+        ResetParallax(service);
+
         if (!string.IsNullOrEmpty(spawnID))
         {
-            yield return screenFader.Fade(0f, 1f, 0.5f);
+            yield return screenFader.Fade(1f, 0f, 0.5f);
         }
     }
 

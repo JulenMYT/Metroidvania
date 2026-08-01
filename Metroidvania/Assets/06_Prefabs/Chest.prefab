@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3436785903932167707}
   - component: {fileID: 4893337864047814870}
   - component: {fileID: 2363377358943072163}
+  - component: {fileID: 2241524048007288981}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -182,3 +183,16 @@ MonoBehaviour:
   lootPrefab: {fileID: 880859392575772896, guid: 435085d622688f1449f874d4ab844603, type: 3}
   spawnDelay: 0.2
   launchForce: 20
+--- !u!114 &2241524048007288981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910493909439555226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099e8585cab2f654fb6b20680b37bafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentGuid
+  guid: b3c75392-1d0a-4934-aeb9-99774dc53347

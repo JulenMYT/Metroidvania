@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,8 +15,15 @@ public class Enemy : MonoBehaviour
     public Enemy_Combat Combat { get; private set; }
     public StateMachine StateMachine { get; private set; }
 
+    //Persistence
+    private WorldState worldState;
+    private PersistentGuid guid;
+    private bool isDefeated;
+
     private void Awake()
     {
+        guid = GetComponent<PersistentGuid>();
+
         RB = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         StateMachine = new StateMachine();
@@ -26,6 +33,14 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        //Persistence
+        worldState = ServiceLocator.Get<WorldState>();
+        if (worldState.defeatedEnemies.Contains(guid.Guid))
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         StateMachine.Initialize(new PatrolState(this));
     }
 
@@ -52,5 +67,15 @@ public class Enemy : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = FacingDirection;
         transform.localScale = scale;
+    }
+
+    public void Die()
+    {
+        if (isDefeated) //Make it idempotent
+        {
+            return;
+        }
+
+        worldState.defeatedEnemies.Add(guid.Guid);
     }
 }

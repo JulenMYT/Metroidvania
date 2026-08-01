@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomService : MonoBehaviour
 {
@@ -12,8 +13,18 @@ public class RoomService : MonoBehaviour
         ServiceLocator.Register<RoomService>(this);
     }
 
+    private void Start()
+    {
+        DiscoverRoom();
+    }
+
     public SpawnPoint GetSpawn(string id)
     {
         return spawns.Find(spawn => spawn.SpawnID == id);
+    }
+
+    private void DiscoverRoom()
+    {
+        ServiceLocator.Get<MiniMapSystem>().VisitRoom(SceneManager.GetActiveScene().name);
     }
 }
