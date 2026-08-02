@@ -193,7 +193,7 @@ public class Player : MonoBehaviour
 
     void Flip()
     {
-        if (currentState == deathState)
+        if (currentState == deathState || currentState == slideState)
         { 
             return; 
         }

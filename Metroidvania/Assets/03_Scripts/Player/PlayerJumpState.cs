@@ -18,7 +18,9 @@ public class PlayerJumpState : PlayerState
     {
         base.Update();
 
-        if (!player.isGrounded && player.isTouchingWall && MoveInput.x == player.facingDirection && rb.linearVelocity.y < 0.5f)
+
+
+        if (!player.isGrounded && player.isTouchingWall && Mathf.Abs(MoveInput.x) > 0.1f && MoveInput.x * player.facingDirection > 0 && rb.linearVelocity.y < 0.5f)
         {
             player.ChangeState(player.wallSlideState);
         }

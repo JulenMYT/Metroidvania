@@ -15,7 +15,7 @@ public class PlayerFallState : PlayerState
     {
         base.Update();
 
-        if (!player.isGrounded && player.isTouchingWall && MoveInput.x == player.facingDirection)
+        if (!player.isGrounded && player.isTouchingWall && Mathf.Abs(MoveInput.x) > 0.1f && MoveInput.x * player.facingDirection > 0)
         {
             player.ChangeState(player.wallSlideState);
         }
