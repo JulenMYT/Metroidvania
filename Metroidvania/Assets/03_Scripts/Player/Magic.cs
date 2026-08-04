@@ -15,6 +15,8 @@ public class Magic : MonoBehaviour
 
     private Dictionary<SpellSO, float> spellCooldowns = new Dictionary<SpellSO, float>();
 
+    private int spellPower;
+
     private void Start()
     {
         spellUIManager.ShowSpells(availableSpells);
@@ -96,9 +98,14 @@ public class Magic : MonoBehaviour
         if (!CanCast(lockedSpell) || lockedSpell == null)
             return;
 
-        lockedSpell.Cast(player);
+        lockedSpell.Cast(player, spellPower);
 
         spellCooldowns[lockedSpell] = Time.time + lockedSpell.cooldown;
         spellUIManager.TriggerCooldown(lockedSpell, lockedSpell.cooldown);
+    }
+
+    public void SetStats(int spellPower)
+    {
+        this.spellPower = spellPower;
     }
 }

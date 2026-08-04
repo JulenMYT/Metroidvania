@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5633292866467198776}
   - component: {fileID: 7452735329517000451}
+  - component: {fileID: 4455039927951959193}
   m_Layer: 5
   m_Name: StatsSlot
   m_TagString: Untagged
@@ -65,6 +66,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4455039927951959193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581611105278432134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e657341acce7c4b4c905f97cf8c9f182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatSlot
+  displayName: 
+  nameText: {fileID: 507170878828281307}
+  valueText: {fileID: 2050279562114030032}
+  previewText: {fileID: 6091539630424787554}
 --- !u!1 &2597946648756032122
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +254,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 60}
+  m_SizeDelta: {x: 100, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3563787950337673688
 CanvasRenderer:

@@ -329,6 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 16
   maxHealth: 16
+  healthPopup: {fileID: 1752401273320438418, guid: 6d00abc6c3f7c7b4685e7e1bf690b65c, type: 3}
 --- !u!114 &3760373033361439894
 MonoBehaviour:
   m_ObjectHideFlags: 0

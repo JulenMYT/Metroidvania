@@ -8,7 +8,7 @@ public class TeleportSpellSO : SpellSO
     public float playerRadius = 1.5f;
     public LayerMask obstacleLayer;
 
-    public override void Cast(Player player)
+    public override void Cast(Player player, int spellPower)
     {
         Vector2 direction = new Vector2(player.facingDirection, 0);
         Vector2 targetPosition = (Vector2)player.transform.position + direction * range;

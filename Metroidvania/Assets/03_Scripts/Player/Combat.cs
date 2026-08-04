@@ -3,7 +3,10 @@ using UnityEngine;
 public class Combat : MonoBehaviour
 {
     [Header("Attack Settings")]
-    public int damage;
+    private int damage;
+    private float critChance;
+    public float critMultiplier = 1.5f;
+
     public float attackRadius = 0.5f;
     public float attackCooldown = 1.5f;
     public Transform attackPoint;
@@ -20,6 +23,12 @@ public class Combat : MonoBehaviour
         player.AnimationFinished();
     }
 
+    public void SetStats(int damage, float critChance)
+    {
+        this.damage = damage;
+        this.critChance = critChance;
+    }
+
     public void Attack()
     {
         if (!CanAttack)
@@ -32,7 +41,12 @@ public class Combat : MonoBehaviour
         if (enemy != null)
         {
             hitFX.Play("HitFX");
-            enemy.gameObject.GetComponent<Health>().ChangeHealth(-damage, transform.position);
+            int realDamage = damage;
+            if (Random.value < critChance)
+            {
+                realDamage = Mathf.RoundToInt(realDamage * critMultiplier);
+            }   
+            enemy.gameObject.GetComponent<Health>().ChangeHealth(-realDamage, transform.position);
         }
     }
 

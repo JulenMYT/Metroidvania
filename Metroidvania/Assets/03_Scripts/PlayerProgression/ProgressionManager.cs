@@ -1,13 +1,17 @@
+using System;
 using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
 
-public class ProgressionManager : MonoBehaviour
+public class ProgressionManager : MenuPanel
 {
+    public event Action OnStatsChanged;
+
     [Header("UI References")]
     public TMP_Text pointsText;
     
     public AttributesSlot[] attributesSlots;
+    public StatSlot[] statSlots;
 
     [Header("Settings")]
     public int availablePoints = 5;
@@ -45,6 +49,9 @@ public class ProgressionManager : MonoBehaviour
         if (amount < 0 && currentPreview <= 0)
             return;
 
+        if (amount > 0 && currentPreview >= 20)
+            return;
+
         previewAttributes.Set(type, currentPreview + amount);
         availablePoints -= amount;
 
@@ -56,6 +63,7 @@ public class ProgressionManager : MonoBehaviour
         baseAttributes = previewAttributes.Clone();
         startingPoints = availablePoints;
         RefreshUI();
+        OnStatsChanged?.Invoke();
     }
 
     public void CancelChanges()
@@ -72,5 +80,24 @@ public class ProgressionManager : MonoBehaviour
         {
             slot.Refresh();
         }
+        RefreshStatsMenu();
+    }
+
+    public void RefreshStatsMenu()
+    {
+        statSlots[0].Refresh(Stats.MaxHealth(baseAttributes), Stats.MaxHealth(previewAttributes));
+        statSlots[1].Refresh(Stats.AttackDamage(baseAttributes), Stats.AttackDamage(previewAttributes));
+        statSlots[2].Refresh(Stats.SpellPower(baseAttributes), Stats.SpellPower(previewAttributes));
+        statSlots[3].Refresh(Stats.CritChance(baseAttributes), Stats.CritChance(previewAttributes));
+    }
+
+    public override void Open()
+    {
+        RefreshStatsMenu();
+    }
+
+    public override void Close()
+    {
+        CancelChanges();
     }
 }

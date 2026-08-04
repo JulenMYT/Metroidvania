@@ -2,7 +2,7 @@
 public class Attributes
 {
     public int power = 10;
-    public int vittality = 10;
+    public int vitality = 10;
     public int focus = 10;
     public int agility = 10;
 
@@ -12,7 +12,7 @@ public class Attributes
         return new Attributes
         {
             power = this.power,
-            vittality = this.vittality,
+            vitality = this.vitality,
             focus = this.focus,
             agility = this.agility
         };
@@ -23,7 +23,7 @@ public class Attributes
         return type switch
         {
             AttributeType.Power => power,
-            AttributeType.Vitality => vittality,
+            AttributeType.Vitality => vitality,
             AttributeType.Focus => focus,
             AttributeType.Agility => agility,
             _ => 0
@@ -38,7 +38,7 @@ public class Attributes
                 power = value;
                 break;
             case AttributeType.Vitality:
-                vittality = value;
+                vitality = value;
                 break;
             case AttributeType.Focus:
                 focus = value;
