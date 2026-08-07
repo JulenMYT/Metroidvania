@@ -299,6 +299,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Combat
   attackPoint: {fileID: 894637196167541574}
+  attackSound:
+    soundClip: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
+    volume: 0.5
+  hitSound:
+    soundClip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
+    volume: 0.6
 --- !u!114 &3660291319641829550
 MonoBehaviour:
   m_ObjectHideFlags: 0

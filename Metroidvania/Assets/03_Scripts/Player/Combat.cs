@@ -13,10 +13,18 @@ public class Combat : MonoBehaviour
     public LayerMask enemyLayer;
     public Animator hitFX;
 
+    [Header("Sound")]
+    public AudioData attackSound;
+    public AudioData hitSound;
+
+    private AudioManager audioManager;
+
     public Player player;
 
     public bool CanAttack => Time.time >= nextAttackTime;
     private float nextAttackTime;
+
+    private void Start() => audioManager = ServiceLocator.Get<AudioManager>();
 
     public void AttackAnimationFinished()
     {
@@ -34,6 +42,8 @@ public class Combat : MonoBehaviour
         if (!CanAttack)
             return;
 
+        audioManager.PlaySFX(attackSound);
+
         nextAttackTime = Time.time + attackCooldown;
 
         Collider2D enemy = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
@@ -47,6 +57,7 @@ public class Combat : MonoBehaviour
                 realDamage = Mathf.RoundToInt(realDamage * critMultiplier);
             }   
             enemy.gameObject.GetComponent<Health>().ChangeHealth(-realDamage, transform.position);
+            audioManager.PlaySFX(hitSound);
         }
     }
 

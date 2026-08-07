@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Android.Gradle.Manifest;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -56,6 +57,8 @@ public class RoomTransitionManager : MonoBehaviour
 
         SetupRoom(service, spawnID);
         SetupCameraConfiner(service);
+
+        ServiceLocator.Get<AudioManager>().PlayMusic(service.roomMusic);
 
         isTransitioning = false;
         player.isControlLocked = false;

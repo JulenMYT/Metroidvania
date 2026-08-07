@@ -8,10 +8,17 @@ public class Enemy_Combat : MonoBehaviour
     private Enemy enemy;
     private float lastAttackTime;
 
+    [Header("Sound")]
+    public AudioData attackSound;
+    public AudioData hitSound;
+
+    private AudioManager audioManager;
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         config = enemy.Config;
+        audioManager = ServiceLocator.Get<AudioManager>();
     }
 
     public bool CanMeleeAttack() => Time.time > lastAttackTime + config.meleeCooldown;
@@ -19,6 +26,7 @@ public class Enemy_Combat : MonoBehaviour
 
     public void PerformMeleeAttack()
     {
+        audioManager.PlaySFX(attackSound);
         lastAttackTime = Time.time;
 
         Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, config.meleeRange, config.targetLayer);
@@ -28,6 +36,7 @@ public class Enemy_Combat : MonoBehaviour
         Health health = hit.GetComponentInChildren<Health>();
         if (health != null)
         {
+            audioManager.PlaySFX(hitSound);
             health.ChangeHealth(-config.meleeDamage, transform.position);
         }
     }

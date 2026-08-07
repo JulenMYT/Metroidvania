@@ -7,6 +7,7 @@ public class RoomService : MonoBehaviour
     public CameraConfinerProvider provider;
     public ParallaxManager parallax;
     public List<SpawnPoint> spawns;
+    public AudioData roomMusic;
 
     private void Awake()
     {
