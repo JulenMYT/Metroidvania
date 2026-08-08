@@ -17790,6 +17790,10 @@ PrefabInstance:
       propertyPath: canBeCollected
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1933300974977810972, guid: 435085d622688f1449f874d4ab844603, type: 3}
+      propertyPath: isPersistentLoot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5246573605771636860, guid: 435085d622688f1449f874d4ab844603, type: 3}
       propertyPath: guid
       value: 5ed5e83f-8cc9-44a4-9308-f16774b76bfb
@@ -18394,6 +18398,9 @@ MonoBehaviour:
   spawns:
   - {fileID: 952470416}
   - {fileID: 1529182454}
+  roomMusic:
+    soundClip: {fileID: 0}
+    volume: 0.5
 --- !u!4 &1790244677
 Transform:
   m_ObjectHideFlags: 0

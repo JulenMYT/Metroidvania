@@ -1,8 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Magic : MonoBehaviour
 {
+    [Header("SpellDatabase")]
+    [SerializeField] private List<SpellSO> allSpells;
+
     [Header("References")]
     public Player player;
     public SpellUIManager spellUIManager;
@@ -107,5 +111,34 @@ public class Magic : MonoBehaviour
     public void SetStats(int spellPower)
     {
         this.spellPower = spellPower;
+    }
+
+    //PERSISTENCE
+    public List<SpellSO> GetLearnedSpells() => availableSpells;
+    public int GetSelectedSpellIndex() => currentIndex;
+
+    public void LoadSpells(List<string> spellNames, int selectedIndex)
+    {
+        foreach (string name in spellNames)
+        {
+            SpellSO spell = FindSpell(name);
+            if (spell != null)
+            {
+                LearnSpell(spell);
+            }
+        }
+
+        SetCurrentSpell(selectedIndex);
+    }
+
+    private SpellSO FindSpell(string itemName) => allSpells.Find(spell => spell.itemName == itemName);
+
+    private void SetCurrentSpell(int index)
+    {
+        if (availableSpells.Count == 0)
+            return;
+
+        currentIndex = index;
+        HighlightCurrentSpell();
     }
 }

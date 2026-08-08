@@ -2746,6 +2746,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d0f4a672380e041a5bc9460af46c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Magic
+  allSpells:
+  - {fileID: 11400000, guid: 6c14e60cd221c7c448d5e0463e674647, type: 2}
+  - {fileID: 11400000, guid: c2b425fcfc1c16148942eac0e0a19307, type: 2}
+  - {fileID: 11400000, guid: 4df4281be541e1440a6f1c2abddf86f5, type: 2}
+  - {fileID: 11400000, guid: aec19c605b2a4b249a2cdc2def7e9de4, type: 2}
+  - {fileID: 11400000, guid: e3a90582f22c3bd42bce5734ae623be8, type: 2}
+  - {fileID: 11400000, guid: b1f41c377cc53884e83293f5e1e80052, type: 2}
   player: {fileID: 1514811651}
   spellUIManager: {fileID: 1973981832}
   availableSpells: []
@@ -2763,7 +2770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 0
-  maxHealth: 10
+  maxHealth: 0
   healthPopup: {fileID: 1752401273320438418, guid: 6d00abc6c3f7c7b4685e7e1bf690b65c, type: 3}
 --- !u!114 &482966170
 MonoBehaviour:
@@ -6057,6 +6064,7 @@ GameObject:
   - component: {fileID: 1514811652}
   - component: {fileID: 1514811653}
   - component: {fileID: 1514811654}
+  - component: {fileID: 1514811655}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -6263,6 +6271,20 @@ MonoBehaviour:
   progressionManager: {fileID: 1971372920}
   health: {fileID: 482966169}
   combat: {fileID: 482966167}
+  magic: {fileID: 482966168}
+--- !u!114 &1514811655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514811647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d256c866b2dcc45a3522866ffffe25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPersistence
+  health: {fileID: 482966169}
   magic: {fileID: 482966168}
 --- !u!1 &1523668288
 GameObject:
@@ -6616,6 +6638,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 330}
   m_SizeDelta: {x: 500, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1595430240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595430242}
+  - component: {fileID: 1595430241}
+  m_Layer: 0
+  m_Name: '[SaveManager]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1595430241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595430240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e95c2acf6dfe3243a59ea7647c3adbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+--- !u!4 &1595430242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595430240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1639262359
 GameObject:
   m_ObjectHideFlags: 0
@@ -9802,3 +9868,4 @@ SceneRoots:
   - {fileID: 486265060}
   - {fileID: 83186360}
   - {fileID: 11706846}
+  - {fileID: 1595430242}

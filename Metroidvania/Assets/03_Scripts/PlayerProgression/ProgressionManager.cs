@@ -3,7 +3,7 @@ using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
 
-public class ProgressionManager : MenuPanel
+public class ProgressionManager : MenuPanel, IDataPersistence
 {
     public event Action OnStatsChanged;
 
@@ -31,6 +31,8 @@ public class ProgressionManager : MenuPanel
         {
             slot.Setup(this);
         }
+
+        ServiceLocator.Get<SaveManager>().Register(this);
         RefreshUI();
     }
 
@@ -99,5 +101,33 @@ public class ProgressionManager : MenuPanel
     public override void Close()
     {
         CancelChanges();
+    }
+
+
+    //PERSISTENCE
+    public void SaveData(SaveData saveData)
+    {
+        saveData.availableStatPoins = availablePoints;
+
+        saveData.power = baseAttributes.power;
+        saveData.vitality = baseAttributes.vitality;
+        saveData.focus = baseAttributes.focus;
+        saveData.agility = baseAttributes.agility;
+    }
+
+    public void LoadData(SaveData saveData)
+    {
+        availablePoints = saveData.availableStatPoins;
+
+        baseAttributes.power = saveData.power;
+        baseAttributes.vitality = saveData.vitality;
+        baseAttributes.focus = saveData.focus;
+        baseAttributes.agility = saveData.agility;
+
+        previewAttributes = baseAttributes.Clone();
+        startingPoints = availablePoints;
+
+        RefreshUI();
+        OnStatsChanged?.Invoke();
     }
 }

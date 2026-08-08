@@ -35,13 +35,23 @@ public class Enemy : MonoBehaviour
     {
         //Persistence
         worldState = ServiceLocator.Get<WorldState>();
+        SaveManager.OnSaveDataLoaded += InitializeFromSave; //So we initialize AFTER data has been loaded
+        InitializeFromSave(); //So we always initialize when entering a room
+        StateMachine.Initialize(new PatrolState(this));
+    }
+
+
+    private void OnDestroy()
+    {
+        SaveManager.OnSaveDataLoaded -= InitializeFromSave;
+    }
+
+    private void InitializeFromSave()
+    {
         if (worldState.defeatedEnemies.Contains(guid.Guid))
         {
             Destroy(gameObject);
-            return;
         }
-
-        StateMachine.Initialize(new PatrolState(this));
     }
 
     private void Update() => StateMachine.CurrentState?.Update();

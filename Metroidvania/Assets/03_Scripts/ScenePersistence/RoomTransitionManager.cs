@@ -4,7 +4,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RoomTransitionManager : MonoBehaviour
+public class RoomTransitionManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private ScreenFader screenFader;
     [SerializeField] private CameraManager camManager;
@@ -14,6 +14,7 @@ public class RoomTransitionManager : MonoBehaviour
 
     void Start()
     {
+        ServiceLocator.Get<SaveManager>().Register(this);
         EnterRoom("", "");
     }
 
@@ -95,5 +96,17 @@ public class RoomTransitionManager : MonoBehaviour
     {
         if (service != null && service.parallax != null)
             service.parallax.Initialize(camManager.camTransform);
+    }
+
+    //PERSISTENCE
+    public void SaveData(SaveData saveData)
+    {
+        saveData.lastSceneName = currentRoom;
+    }
+
+    public void LoadData(SaveData saveData)
+    {
+        if (!string.IsNullOrEmpty(saveData.lastSceneName))
+            StartCoroutine(Transition(saveData.lastSceneName, ""));
     }
 }

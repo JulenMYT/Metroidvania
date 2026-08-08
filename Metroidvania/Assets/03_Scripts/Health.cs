@@ -13,9 +13,9 @@ public class Health : MonoBehaviour
     [Header("Popup")]
     public GameObject healthPopup;
 
-    private void Start()
+    public void SetHealth(int amount)
     {
-        health = maxHealth;
+        health = amount;
         OnHealthChanged?.Invoke(health, maxHealth);
     }
 

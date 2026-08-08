@@ -25,6 +25,17 @@ public class Chest : MonoBehaviour
     {
         //Persistence
         worldState = ServiceLocator.Get<WorldState>();
+        SaveManager.OnSaveDataLoaded += InitializeFromSave;
+        InitializeFromSave();
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.OnSaveDataLoaded -= InitializeFromSave;
+    }
+
+    private void InitializeFromSave()
+    { 
         if (worldState.openedChests.Contains(guid.Guid))
         {
             isOpened = true;

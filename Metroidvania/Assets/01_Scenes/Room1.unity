@@ -13301,6 +13301,9 @@ MonoBehaviour:
   spawns:
   - {fileID: 965850023}
   - {fileID: 1127110125}
+  roomMusic:
+    soundClip: {fileID: 0}
+    volume: 0.5
 --- !u!4 &1003233925
 Transform:
   m_ObjectHideFlags: 0
@@ -14146,6 +14149,10 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c3cb466668c2cd04b8d746649e4f1867, type: 2}
     - target: {fileID: 1933300974977810972, guid: 435085d622688f1449f874d4ab844603, type: 3}
       propertyPath: canBeCollected
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933300974977810972, guid: 435085d622688f1449f874d4ab844603, type: 3}
+      propertyPath: isPersistentLoot
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246573605771636860, guid: 435085d622688f1449f874d4ab844603, type: 3}

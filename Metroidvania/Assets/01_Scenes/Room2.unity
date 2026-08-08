@@ -17518,8 +17518,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52847a395d4cb94084922de75b75577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicTrigger
-  musicClip: {fileID: 0}
-  volume: 1
+  musicData:
+    soundClip: {fileID: 0}
+    volume: 0.5
 --- !u!1 &1159244111
 GameObject:
   m_ObjectHideFlags: 0
@@ -18440,6 +18441,10 @@ PrefabInstance:
       propertyPath: canBeCollected
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1933300974977810972, guid: 435085d622688f1449f874d4ab844603, type: 3}
+      propertyPath: isPersistentLoot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5246573605771636860, guid: 435085d622688f1449f874d4ab844603, type: 3}
       propertyPath: guid
       value: 626fb657-bf34-4cf6-aa96-ef1ba088c77f
@@ -18581,7 +18586,9 @@ MonoBehaviour:
   parallax: {fileID: 453754462}
   spawns:
   - {fileID: 438639265}
-  roomMusic: {fileID: 0}
+  roomMusic:
+    soundClip: {fileID: 0}
+    volume: 0.5
 --- !u!4 &2119228588
 Transform:
   m_ObjectHideFlags: 0
