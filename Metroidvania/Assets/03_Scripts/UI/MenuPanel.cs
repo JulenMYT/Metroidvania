@@ -18,7 +18,7 @@ public class MenuPanel : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        menuToggleAction.action.performed += ToggleMenu;
+        menuToggleAction.action.performed -= ToggleMenu;
     }
 
     public virtual void Open() { }
